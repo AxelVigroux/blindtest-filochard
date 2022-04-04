@@ -4,11 +4,21 @@ import "./App.css";
 
 function App() {
   const [playListId, setPlaylistId] = useState("");
-  const [songs, setSongs] = useState([]);
+  const [fetchedSongs, setFetchedSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [done, setDone] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [songs, setSongs] = useState([]);
+  const [songsData, setSongsData] = useState("");
+  const [index, setIndex] = useState(1);
 
+  const createSongs = (data) => {
+    setSongs([...songs, { index, data, done: false }]);
+    setSongsData("");
+    setIndex(index + 1);
+  };
+
+  console.log({ fetchedSongs });
   useEffect(() => {
     axios
       .get(
@@ -18,7 +28,7 @@ function App() {
           process.env.REACT_APP_YOUTUBE_API_KEY
       )
       .then((response) => {
-        setSongs(response.data.items);
+        createSongs(response.data.items);
       })
       .catch((err) => {
         setError(err);
@@ -26,8 +36,7 @@ function App() {
       });
   }, [playListId]);
 
-  console.log("SONGS", songs);
-  console.log(playListId);
+  console.log("SONGS", { songs });
 
   return (
     <div className="App">
@@ -40,11 +49,36 @@ function App() {
           setPlaylistId(e.currentTarget.value);
         }}
       ></input>
-      <ul>
-        {songs.map((song, idx) => (
-          <li key={idx}>{song.snippet.title}</li>
-        ))}
-      </ul>
+      <div className="playlist">
+        <ul>
+          {songs.map((song, idx) => (
+            <li key={idx}>
+              {clicked === false ? (
+                <button
+                  onClick={() => {
+                    console.log("LOG DE IDX: ", idx);
+                    setClicked(true);
+                  }}
+                >
+                  Afficher le titre
+                </button>
+              ) : (
+                <p>
+                  {" "}
+                  {song.snippet.title}
+                  <button
+                    onClick={() => {
+                      setClicked(false);
+                    }}
+                  >
+                    Cacher le titre
+                  </button>
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
