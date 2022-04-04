@@ -2,6 +2,8 @@
   text-align: center;
   height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -16,6 +18,29 @@ li {
 
 }
 
-.playlist {
-  background-color: green;
+.main-content {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 85%;
+  height: 85%;
+}
+
+.current-song {
+  
+}
+.input-form {
+  display: flex;
+  margin: auto;
+
+}
+
+button {
+  height: 25px;
+  margin: 25px;
+}
+
+input {
+  height: 25px;
 }

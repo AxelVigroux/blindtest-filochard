@@ -7,18 +7,34 @@ function App() {
   const [fetchedSongs, setFetchedSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [clicked, setClicked] = useState(false);
-  const [songs, setSongs] = useState([]);
-  const [songsData, setSongsData] = useState("");
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(0);
+  const [ready, setReady] = useState(false);
+  const [show, setShow] = useState(false);
 
-  const createSongs = (data) => {
-    setSongs([...songs, { index, data, done: false }]);
-    setSongsData("");
-    setIndex(index + 1);
+  const nextSong = () => {
+    if (index + 1 >= fetchedSongs.length) {
+      setIndex(0);
+    } else {
+      setIndex(index + 1);
+    }
+  };
+
+  const prevSong = () => {
+    if (index - 1 < 0) {
+      setIndex(fetchedSongs.length - 1);
+    } else {
+      setIndex(index - 1);
+    }
+  };
+
+  const toggle = () => {
+    setShow(!show);
   };
 
   console.log({ fetchedSongs });
+
+  // const url = "https://www.youtube.com/embed/";
+
   useEffect(() => {
     axios
       .get(
@@ -28,7 +44,8 @@ function App() {
           process.env.REACT_APP_YOUTUBE_API_KEY
       )
       .then((response) => {
-        createSongs(response.data.items);
+        setFetchedSongs(response.data.items);
+        setReady(true);
       })
       .catch((err) => {
         setError(err);
@@ -36,49 +53,35 @@ function App() {
       });
   }, [playListId]);
 
-  console.log("SONGS", { songs });
+  console.log("SONGS", { fetchedSongs });
 
   return (
     <div className="App">
       <h1>Filo Right</h1>
-      <input
-        type="text"
-        name="url"
-        onChange={(e) => {
-          e.preventDefault();
-          setPlaylistId(e.currentTarget.value);
-        }}
-      ></input>
-      <div className="playlist">
-        <ul>
-          {songs.map((song, idx) => (
-            <li key={idx}>
-              {clicked === false ? (
-                <button
-                  onClick={() => {
-                    console.log("LOG DE IDX: ", idx);
-                    setClicked(true);
-                  }}
-                >
-                  Afficher le titre
-                </button>
-              ) : (
-                <p>
-                  {" "}
-                  {song.snippet.title}
-                  <button
-                    onClick={() => {
-                      setClicked(false);
-                    }}
-                  >
-                    Cacher le titre
-                  </button>
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {ready === false ? (
+        <div className="input-form">
+          <input
+            type="text"
+            name="url"
+            onChange={(e) => {
+              e.preventDefault();
+              setPlaylistId(e.currentTarget.value);
+            }}
+          ></input>
+        </div>
+      ) : (
+        <div className="main-content">
+          <h2>Chanson numéro {index}</h2>
+          <div className="current-song">
+            <button onClick={prevSong}>Précédent</button>
+            <button onClick={toggle}>
+              {show ? "Cacher le titre" : "Voir le titre"}
+            </button>
+            {show ? fetchedSongs[index].snippet.title : null}
+            <button onClick={nextSong}>Suivant</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
