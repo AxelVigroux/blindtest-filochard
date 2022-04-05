@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+<<<<<<< HEAD
 import ReactPlayer from "react-player";
 import Logo from "./assets/logo_le_filochard.png";
+=======
+>>>>>>> parent of cdd70c9 (everything it's working, go css now !)
 
 function App() {
   const [playListId, setPlaylistId] = useState("");
@@ -12,13 +15,38 @@ function App() {
   const [index, setIndex] = useState(0);
   const [ready, setReady] = useState(false);
   const [show, setShow] = useState(false);
-  const [playing, setPlaying] = useState(false);
 
+<<<<<<< HEAD
   const playPause = () => {
     setPlaying(!playing);
   };
 
   console.log(fetchedSongs);
+=======
+  const nextSong = () => {
+    if (index + 1 >= fetchedSongs.length) {
+      setIndex(0);
+    } else {
+      setIndex(index + 1);
+    }
+  };
+
+  const prevSong = () => {
+    if (index - 1 < 0) {
+      setIndex(fetchedSongs.length - 1);
+    } else {
+      setIndex(index - 1);
+    }
+  };
+
+  const toggle = () => {
+    setShow(!show);
+  };
+
+  console.log({ fetchedSongs });
+>>>>>>> parent of cdd70c9 (everything it's working, go css now !)
+
+  // const url = "https://www.youtube.com/embed/";
 
   useEffect(() => {
     axios
@@ -36,6 +64,8 @@ function App() {
         console.error(err);
       });
   }, [playListId]);
+
+  console.log("SONGS", { fetchedSongs });
 
   return (
     <div className="App">
@@ -55,42 +85,14 @@ function App() {
         </div>
       ) : (
         <div className="main-content">
-          <div className="left-button">
-            <button className="prev-button" onClick={prevSong}>
-              Précédent
-            </button>
-          </div>
-
+          <h2>Chanson numéro {index}</h2>
           <div className="current-song">
-            <h2>Chanson numéro {index + 1}</h2>
-            <div className="text-content">
-              <button className="reveal-button" onClick={toggle}>
-                {show ? "Cacher le titre" : "Afficher le titre"}
-              </button>
-              {show ? (
-                <h2 className="title">{fetchedSongs[index].snippet.title} </h2>
-              ) : null}
-              <ReactPlayer
-                className="player"
-                url={
-                  `"https://www.youtube.com/watch?v="` +
-                  `${fetchedSongs[index].contentDetails.videoId}`
-                }
-                volume={1}
-                controls={true}
-                height="50%"
-                width="50%"
-                playing={playing}
-              ></ReactPlayer>
-            </div>
-            <div className="controllers" onClick={playPause}>
-              {playing ? <button>Pause</button> : <button>Play</button>}
-            </div>
-          </div>
-          <div className="right-button">
-            <button className="next-button" onClick={nextSong}>
-              Suivant
+            <button onClick={prevSong}>Précédent</button>
+            <button onClick={toggle}>
+              {show ? "Cacher le titre" : "Voir le titre"}
             </button>
+            {show ? fetchedSongs[index].snippet.title : null}
+            <button onClick={nextSong}>Suivant</button>
           </div>
         </div>
       )}

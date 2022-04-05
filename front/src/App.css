@@ -3,9 +3,9 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  margin: auto;
   flex-direction: column;
 }
+
 
 ul {
   list-style: none;
@@ -15,48 +15,35 @@ ul {
 li {
   padding: 15px;
   border-bottom: 1px solid black;
+
 }
 
 .main-content {
   display: flex;
   margin: auto;
-  flex-direction: row;
-  justify-content: space-between;
-  width:800px;
-  height: 500px;
-  background-color: red;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 85%;
+  height: 85%;
 }
 
+.current-song {
+  
+}
 .input-form {
   display: flex;
   margin: auto;
+
 }
 
 button {
   height: 25px;
   margin: 25px;
-  width: 150px;
-}
-
-.current-song {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  height: 100%;
-  width: 650px;
-  justify-content: space-between;
-}
-
-
-.text-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
 }
 
 input {
   height: 25px;
+<<<<<<< HEAD
 }
 
 .left-button  {
@@ -84,3 +71,6 @@ input {
 .title {
   margin: 0;
 }
+=======
+}
+>>>>>>> parent of cdd70c9 (everything it's working, go css now !)
