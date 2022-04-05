@@ -36,3 +36,26 @@
 //             frameborder="0"
 //             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 //           ></iframe>
+
+// PLAYER
+
+// <div id="player"></div>
+// <iframe
+//   title="blindtest-songs"
+//   id="video"
+//   width="400"
+//   height="200"
+//   src={
+//     url +
+//     `${fetchedSongs[index].contentDetails.videoId}` +
+//     "?enablejsapi=1&html5=1&autoplay=1"
+//   }
+//   frameBorder="0"
+// ></iframe>{" "}
+
+// PLAY BUTTON
+{
+  /* <button className="button" id="play-button" onClick={playButton}>
+PLAY
+</button> */
+}
