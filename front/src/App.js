@@ -14,26 +14,6 @@ function App() {
   const [show, setShow] = useState(false);
   const [playing, setPlaying] = useState(false);
 
-  const nextSong = () => {
-    if (index + 1 >= fetchedSongs.length) {
-      setIndex(0);
-    } else {
-      setIndex(index + 1);
-    }
-  };
-
-  const prevSong = () => {
-    if (index - 1 < 0) {
-      setIndex(fetchedSongs.length - 1);
-    } else {
-      setIndex(index - 1);
-    }
-  };
-
-  const toggle = () => {
-    setShow(!show);
-  };
-
   const playPause = () => {
     setPlaying(!playing);
   };
@@ -49,8 +29,7 @@ function App() {
           process.env.REACT_APP_YOUTUBE_API_KEY
       )
       .then((response) => {
-        setFetchedSongs(response.data.items);
-        setReady(true);
+        createSongs(response.data.items);
       })
       .catch((err) => {
         setError(err);
