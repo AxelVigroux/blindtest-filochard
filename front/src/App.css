@@ -77,11 +77,8 @@ input {
   background-color: blue;
 }
 
-.reveal-button {
-}
-
 .player {
-  visibility: hidden;
+  visibility: visible;
 }
 
 .title {

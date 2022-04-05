@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import ReactPlayer from "react-player";
-// import { playButton, pauseButton, stopButton } from "./utils/youtube";
+import Logo from "./assets/logo_le_filochard.png";
 
 function App() {
   const [playListId, setPlaylistId] = useState("");
@@ -22,8 +22,6 @@ function App() {
     }
   };
 
-  console.log(playListId);
-
   const prevSong = () => {
     if (index - 1 < 0) {
       setIndex(fetchedSongs.length - 1);
@@ -40,7 +38,7 @@ function App() {
     setPlaying(!playing);
   };
 
-  console.log({ fetchedSongs });
+  console.log(fetchedSongs);
 
   useEffect(() => {
     axios
@@ -62,7 +60,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Filo Right</h1>
+      <div className="main-title">
+        <img src={Logo} alt="logo du bar le filochard" />
+      </div>
       {ready === false ? (
         <div className="input-form">
           <input
