@@ -4,8 +4,15 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #1964ac;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  overflow:hidden;
 }
 
+h3 { 
+  margin: 0;
+}
 
 ul {
   list-style: none;
@@ -15,35 +22,118 @@ ul {
 li {
   padding: 15px;
   border-bottom: 1px solid black;
+}
+
+.lazare {
+  height: 350px;
+  width: 200px;
+  position: absolute;
+  left: 50px;
+  bottom: 0px;
+}
+
+.verre {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  top: 50px;
+  right: 150px;
+}
+
+
+.icon {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  bottom: 90px;
+  right: 45%;
 
 }
 
-.main-content {
-  display: flex;
-  margin: auto;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 85%;
-  height: 85%;
+
+@keyframes rotating {
+  from{
+      -webkit-transform: rotate(0deg);
+  }
+  to{
+      -webkit-transform: rotate(360deg);
+  }
 }
 
-.current-song {
-  
+.rotating {
+  animation: rotating 3s linear infinite;
 }
+
+
+.main-title {
+  margin-top: 75px;
+}
+
 .input-form {
   display: flex;
   margin: auto;
-
-}
-
-button {
-  height: 25px;
-  margin: 25px;
+  flex-direction: column;
 }
 
 input {
+  font-size: 1rem;
+  padding: 18px 15px;
+}
+
+.input-form h2 {
+  margin-bottom: 100px;
+}
+
+.controllers {
+  width: 100%;
+  margin-bottom: 250px;
+  
+}
+
+button {
+  align-items: center;
+  background-color: #fdc20d;
+  border-radius: 100px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 45px;
+  padding-right:45px;
+  border-style: solid;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+
+.current-song {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 300px;
+}
+
+.title {
+  font-size: 25px;
+}
+
+
+input {
   height: 25px;
-<<<<<<< HEAD
 }
 
 .left-button  {
@@ -51,7 +141,6 @@ input {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: green;
   width: 150px;
 }
 
@@ -61,16 +150,13 @@ input {
   align-items: center;
   height: 100%;
   width: 150px;
-  background-color: blue;
 }
 
 .player {
-  visibility: visible;
+  visibility: hidden;
 }
 
-.title {
-  margin: 0;
+.song-number {
+  font-size: 45px;
+  margin-top: 70px;
 }
-=======
-}
->>>>>>> parent of cdd70c9 (everything it's working, go css now !)
