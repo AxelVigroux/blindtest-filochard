@@ -17,6 +17,8 @@ function App() {
   const [rotate, setRotate] = useState(false);
 
   const nextSong = () => {
+    setPlaying(false);
+    setShow(false);
     if (index + 1 >= fetchedSongs.length) {
       setIndex(0);
     } else {
@@ -25,6 +27,8 @@ function App() {
   };
 
   const prevSong = () => {
+    setPlaying(false);
+    setShow(false);
     if (index - 1 < 0) {
       setIndex(fetchedSongs.length - 1);
     } else {
@@ -44,7 +48,7 @@ function App() {
   useEffect(() => {
     axios
       .get(
-        "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=25&playlistId=PL-" +
+        "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=35&playlistId=PL-" +
           `${playListId}` +
           "&key=" +
           process.env.REACT_APP_YOUTUBE_API_KEY
