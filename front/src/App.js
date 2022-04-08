@@ -15,6 +15,7 @@ function App() {
   const [show, setShow] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [rotate, setRotate] = useState(false);
+  const [error, setError] = useState(false);
 
   const nextSong = () => {
     setPlaying(false);
@@ -46,20 +47,24 @@ function App() {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=35&playlistId=PL-" +
-          `${playListId}` +
-          "&key=" +
-          process.env.REACT_APP_YOUTUBE_API_KEY
-      )
-      .then((response) => {
-        setFetchedSongs(response.data.items);
-        setReady(true);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (playListId) {
+      axios
+        .get(
+          "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=35&playlistId=PL-" +
+            `${playListId}` +
+            "&key=" +
+            process.env.REACT_APP_YOUTUBE_API_KEY
+        )
+        .then((response) => {
+          setFetchedSongs(response.data.items);
+          setReady(true);
+          setError(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setError(true);
+        });
+    }
   }, [playListId]);
 
   return (
@@ -67,6 +72,7 @@ function App() {
       <div className="main-title">
         <img src={Logo} alt="Nom du bar" className="logo" />
         <h3>Quizz musical bruyant et bordélique !</h3>
+        {error === true ? <h3>Erreur !</h3> : null}
       </div>
       {ready === false ? (
         <div className="input-form">
