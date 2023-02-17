@@ -6,11 +6,11 @@
   flex-direction: column;
   background-color: #1964ac;
   color: white;
-  font-family: 'Poppins', sans-serif;
-  overflow:hidden;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
 }
 
-h3 { 
+h3 {
   margin: 0;
 }
 
@@ -40,30 +40,26 @@ li {
   right: 150px;
 }
 
-
 .icon {
   height: 150px;
   width: 150px;
   position: absolute;
   bottom: 90px;
   right: 45%;
-
 }
 
-
 @keyframes rotating {
-  from{
-      -webkit-transform: rotate(0deg);
+  from {
+    -webkit-transform: rotate(0deg);
   }
-  to{
-      -webkit-transform: rotate(360deg);
+  to {
+    -webkit-transform: rotate(360deg);
   }
 }
 
 .rotating {
   animation: rotating 3s linear infinite;
 }
-
 
 .main-title {
   margin-top: 75px;
@@ -87,7 +83,6 @@ input {
 .controllers {
   width: 100%;
   margin-bottom: 250px;
-  
 }
 
 button {
@@ -107,18 +102,16 @@ button {
   overflow: hidden;
   padding: 0px;
   padding-left: 45px;
-  padding-right:45px;
+  padding-right: 45px;
   border-style: solid;
   margin-left: 25px;
   margin-right: 25px;
 }
 
-
 .current-song {
   display: flex;
   flex-direction: column;
 }
-
 
 .text-content {
   display: flex;
@@ -131,12 +124,11 @@ button {
   font-size: 25px;
 }
 
-
 input {
   height: 25px;
 }
 
-.left-button  {
+.left-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,4 +151,70 @@ input {
 .song-number {
   font-size: 45px;
   margin-top: 70px;
+}
+
+/* Styles pour les écrans de 600px et moins */
+@media only screen and (max-width: 600px) {
+  .logo {
+    width: 100%;
+  }
+
+  .main-title h3 {
+    font-size: 1.5rem;
+  }
+
+  .input-form {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .input-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .input-form input {
+    width: 100%;
+  }
+
+  .main-content {
+    flex-direction: column;
+  }
+
+  .verre,
+  .lazare {
+    display: none;
+  }
+
+  .icon {
+    width: 50%;
+  }
+
+  .current-song {
+    width: 100%;
+  }
+
+  .text-content {
+    margin: 0 auto;
+  }
+
+  .text-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .player {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+  }
+
+  .controllers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controllers button {
+    margin: 0.5rem;
+    width: 80%;
+  }
 }

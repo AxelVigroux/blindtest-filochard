@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import axios from "axios";
 import "./App.css";
 import ReactPlayer from "react-player";
@@ -8,7 +9,7 @@ import Lazare from "./assets/lazareDanse_320x650.gif";
 import Verre from "./assets/Verre.gif";
 
 function App() {
-  const [playListId, setPlaylistId] = useState("");
+  const [rawUrl, setRawUrl] = useState("");
   const [fetchedSongs, setFetchedSongs] = useState([]);
   const [index, setIndex] = useState(0);
   const [ready, setReady] = useState(false);
@@ -20,6 +21,7 @@ function App() {
   const nextSong = () => {
     setPlaying(false);
     setShow(false);
+    setRotate(false);
     if (index + 1 >= fetchedSongs.length) {
       setIndex(0);
     } else {
@@ -30,6 +32,7 @@ function App() {
   const prevSong = () => {
     setPlaying(false);
     setShow(false);
+    setRotate(false);
     if (index - 1 < 0) {
       setIndex(fetchedSongs.length - 1);
     } else {
@@ -47,25 +50,31 @@ function App() {
   };
 
   useEffect(() => {
-    if (playListId) {
-      axios
-        .get(
-          "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=35&playlistId=PL-" +
-            `${playListId}` +
-            "&key=" +
-            process.env.REACT_APP_YOUTUBE_API_KEY
-        )
-        .then((response) => {
-          setFetchedSongs(response.data.items);
-          setReady(true);
-          setError(false);
-        })
-        .catch((err) => {
-          console.error(err);
-          setError(true);
-        });
+    if (rawUrl) {
+      const url = new URL(rawUrl);
+      const params = url.searchParams;
+      const playListId = params.get("list");
+
+      if (playListId) {
+        axios
+          .get(
+            "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=35&playlistId=" +
+              `${playListId}` +
+              "&key=" +
+              process.env.REACT_APP_YOUTUBE_API_KEY
+          )
+          .then((response) => {
+            setFetchedSongs(response.data.items);
+            setReady(true);
+            setError(false);
+          })
+          .catch((err) => {
+            console.error(err);
+            setError(true);
+          });
+      }
     }
-  }, [playListId]);
+  }, [rawUrl]);
 
   return (
     <div className="App">
@@ -76,14 +85,14 @@ function App() {
       </div>
       {ready === false ? (
         <div className="input-form">
-          <h2>Copie colle l'id de la playlist</h2>
+          <h2>Copie colle le lien de la playlist</h2>
           <input
-            placeholder="Id de la playlist ici !"
+            placeholder="Le lien youtube de la playlist ici !"
             type="text"
             name="url"
             onChange={(e) => {
               e.preventDefault();
-              setPlaylistId(e.currentTarget.value);
+              setRawUrl(e.currentTarget.value);
             }}
           ></input>
         </div>
